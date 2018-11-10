@@ -145,6 +145,29 @@ describe('routes: shops', () => {
   });
 
   describe('GET api/v1/shops/favorites', () => {
+    it('should return empty favorite shops', async () => {
+      const res = await chai.request(server)
+        .get(`${BASE}/favorites`)
+        .set('Authorization', `Bearer ${token}`);
 
+      // eslint-disable-next-line
+      expect(res.body.favorites).to.exist;
+      // eslint-disable-next-line
+      expect(res.body.favorites).to.be.empty;
+    });
+
+    it('should return a single favorite shops after it has been liked', async () => {
+      const shopId = (await knex('shops').select('id').first()).id;
+      await helpers.likeDislikeShop(shopId, 'liked');
+
+      const res = await chai.request(server)
+        .get(`${BASE}/favorites`)
+        .set('Authorization', `Bearer ${token}`);
+
+      // eslint-disable-next-line
+      expect(res.body.favorites).to.exist;
+      expect(res.body.favorites).to.have.lengthOf(1);
+      expect(res.body.favorites[0].id).to.equal(shopId);
+    });
   });
 });
