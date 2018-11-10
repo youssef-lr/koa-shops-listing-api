@@ -24,13 +24,9 @@ app.use(jwt({ secret: 'secret' }).unless({ path: [/^\/auth/] }));
 app.use(authRoutes.routes());
 app.use(shopRoutes.routes());
 
-app.on('error', (err) => {
-  console.log(err);
-});
-
 const server = app.listen(PORT, () => {
   /* eslint-disable-next-line */
-    console.log(`Server listening on port: ${PORT}`);
+  console.log(`Server listening on port: ${PORT}`);
 });
 
 

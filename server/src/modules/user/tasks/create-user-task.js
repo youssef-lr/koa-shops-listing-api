@@ -30,7 +30,6 @@ module.exports = async (data) => {
     };
   }
 
-
   const salt = bcrypt.genSaltSync();
   const hash = bcrypt.hashSync(password, salt);
 
