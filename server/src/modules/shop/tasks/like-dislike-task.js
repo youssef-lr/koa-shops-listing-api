@@ -20,7 +20,6 @@ module.exports = async (userId, shopId, likeStatus) => {
   const params = {
     user_id: userId,
     shop_id: shopId,
-    disliked_at: dislikedAt,
   };
 
   const likeDislike = await knex('shops_likes')
@@ -30,11 +29,12 @@ module.exports = async (userId, shopId, likeStatus) => {
   if (likeDislike.length) {
     return knex('shops_likes')
       .where(params)
-      .update('like_status', likeStatus);
+      .update({ like_status: likeStatus, disliked_at: dislikedAt });
   }
 
   return knex('shops_likes').insert({
     ...params,
     like_status: likeStatus,
+    disliked_at: dislikedAt,
   }).returning('*');
 };
