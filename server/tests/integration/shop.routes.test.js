@@ -51,27 +51,18 @@ describe('routes: shops', () => {
     });
   });
 
-  const likeShop = async shopId => chai.request(server)
+  const likeDislikeShop = async (shopId, likeStatus) => chai.request(server)
     .post(`${BASE}/like_dislike`)
     .send({
       shopId,
-      likeStatus: 'liked',
+      likeStatus,
     })
     .set('Authorization', `Bearer ${token}`);
-
-  const dislikeShop = async shopId => chai.request(server)
-    .post(`${BASE}/like_dislike`)
-    .send({
-      shopId,
-      likeStatus: 'disliked',
-    })
-    .set('Authorization', `Bearer ${token}`);
-
 
   describe('GET api/v1/shops/like_dislike', () => {
     it('should allow a shop to be liked by authenticated user', async () => {
       const shop = await knex('shops').where('name', 'A').first();
-      const res = await likeShop(shop.id);
+      const res = await likeDislikeShop(shop.id, 'liked');
       expect(res.body.success).to.equal(true);
 
       const shopLike = await knex('shops_likes').where({
@@ -85,7 +76,7 @@ describe('routes: shops', () => {
 
     it('should return all shops except user s favorites', async () => {
       const shop = await knex('shops').where('name', 'A').first();
-      const res = await likeShop(shop.id);
+      const res = await likeDislikeShop(shop.id, 'liked');
 
       expect(res.body.success).to.equal(true);
 
@@ -100,7 +91,7 @@ describe('routes: shops', () => {
 
     it('should allow the user to dislike a shop', async () => {
       const shop = await knex('shops').where('name', 'C').first();
-      const res = await dislikeShop(shop.id);
+      const res = await likeDislikeShop(shop.id, 'disliked');
       expect(res.body.success).to.equal(true);
     });
   });
@@ -108,7 +99,7 @@ describe('routes: shops', () => {
   describe('GET api/v1/shops', () => {
     it('should return all shops except the user s favorites', async () => {
       const shop = await knex('shops').where('name', 'A').first();
-      const res = await likeShop(shop.id);
+      const res = await likeDislikeShop(shop.id, 'liked');
       expect(res.body.success).to.equal(true);
 
       const shops = await getAllShops(userId);
@@ -119,20 +110,22 @@ describe('routes: shops', () => {
 
 
     it('should not return disliked shop', async () => {
+      // Fetching the shop to be disliked
       const shop = await knex('shops').where('name', 'C').first();
-      const res = await dislikeShop(shop.id);
+      const res = await likeDislikeShop(shop.id, 'disliked');
       expect(res.body.success).to.equal(true);
 
       const shops = await getAllShops(userId);
       const dislikedShop = shops.find(s => s.name === 'C');
+
       /* eslint-disable-next-line */
       expect(dislikedShop).to.be.undefined;
     });
 
-    it('should return also disliked shops when dislike date is older than 2 hours', async () => {
+    it('should return disliked shops when their dislike date is older than 2 hours', async () => {
       // Shop to be dislike
       const shop = await knex('shops').where('name', 'C').first();
-      const res = await dislikeShop(shop.id);
+      const res = await likeDislikeShop(shop.id, 'disliked');
       expect(res.body.success).to.equal(true);
 
       /*
@@ -144,8 +137,10 @@ describe('routes: shops', () => {
         disliked_at: date,
       });
 
+
       const shops = await getAllShops(userId);
       const dislikedShop = shops.find(s => s.name === 'C');
+      // Shop should still be in shops list
       expect(dislikedShop.id).to.equal(shop.id);
     });
   });
