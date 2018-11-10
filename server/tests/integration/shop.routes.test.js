@@ -51,17 +51,6 @@ describe('routes: shops', () => {
     });
   });
 
-  describe('GET api/v1/shops', () => {
-    it('should return all shops except favorites', async () => {
-      const res = await chai.request(server)
-        .get(BASE)
-        .set('Authorization', `Bearer ${token}`);
-
-      expect(res.body).to.have.all.keys('shops');
-      expect(res.body.shops.length).to.be.above(0);
-    });
-  });
-
   const likeShop = async shopId => chai.request(server)
     .post(`${BASE}/like_dislike`)
     .send({
