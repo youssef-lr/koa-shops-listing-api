@@ -1,4 +1,4 @@
-# About
+## About
 
 A simple shops listing API with jwt authentication built using the following stack:
 
