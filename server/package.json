@@ -1,0 +1,34 @@
+{
+  "name": "united-demo-server",
+  "version": "1.0.0",
+  "description": "Koa REST API",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/app.js",
+    "test": "./node_modules/mocha/bin/_mocha ./tests/**/*.test.js --exit"
+  },
+  "author": "Youssef Lourayad",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "joi": "^14.0.4",
+    "jsonwebtoken": "^8.3.0",
+    "knex": "^0.15.2",
+    "koa": "^2.6.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-jwt": "^3.5.1",
+    "koa-router": "^7.4.0",
+    "koa-unless": "^1.0.7",
+    "passport-local": "^1.0.0",
+    "pg": "^7.6.1"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
+    "eslint": "^5.8.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "knex-migrate": "^1.7.0",
+    "mocha": "^5.2.0"
+  }
+}
