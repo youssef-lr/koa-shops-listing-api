@@ -1,6 +1,6 @@
 const knex = require('../../../database/connection');
 
-module.exports = async function getUser(params) {
+module.exports = async (params) => {
   const result = await knex('users').where(params).select('*');
 
   if (!result.length) {
