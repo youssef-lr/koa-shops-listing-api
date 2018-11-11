@@ -2,6 +2,10 @@
 
 > A Vue.js project
 
+## Demo
+
+[united-shops-demo](https://united-shops-demo.netlify.com/)
+
 ## Build Setup
 
 ``` bash
