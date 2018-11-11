@@ -64,7 +64,7 @@ describe('routes: auth', () => {
           password: 'hunter2',
         });
 
-      expect(res.body).to.have.all.keys('id', 'email');
+      expect(res.body).to.have.all.keys('user', 'token');
     });
 
     it('should not register a user with an existent email', async () => {
