@@ -25,4 +25,13 @@ export default {
 @tailwind preflight;
 @tailwind components;
 @tailwind utilities;
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

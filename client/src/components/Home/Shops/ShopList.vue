@@ -1,20 +1,37 @@
 <template>
   <div class="mt-3 flex flex-wrap p-2">
-    <shop-card></shop-card>
-    <shop-card></shop-card>
-    <shop-card></shop-card>
-    <shop-card></shop-card>
-    <shop-card></shop-card>
-    <shop-card></shop-card>
-    <shop-card></shop-card>
+    <shop-card :shop="shop" :key="shop.id" v-for="shop in shops"
+               @shop-liked-disliked="handleLikeChange"
+    >
+
+    </shop-card>
   </div>
 </template>
 
 <script>
+import { getAll } from '@/api/shops';
 import ShopCard from './ShopCard';
 
 export default {
-  mounted() {},
+  async created() {
+    const res = await getAll();
+    if (res.shops) {
+      this.shops = res.shops;
+    }
+  },
+  data() {
+    return {
+      shops: [],
+    };
+  },
+  methods: {
+    handleLikeChange(shopId) {
+      const index = this.shops.findIndex(s => s.id === shopId);
+      if (index > -1) {
+        this.shops.splice(index, 1);
+      }
+    },
+  },
   components: {
     ShopCard,
   },

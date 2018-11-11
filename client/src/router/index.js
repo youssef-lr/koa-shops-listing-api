@@ -4,6 +4,8 @@ import Router from 'vue-router';
 import Auth from '../components/Auth/Index';
 import Logout from '../components/Auth/Logout';
 import Home from '../components/Home/Index';
+import ShopList from '../components/Home/Shops/ShopList';
+import Favorites from '../components/Home/Shops/Favorites';
 
 import { isAuthenticated, removeToken } from '../auth';
 
@@ -52,11 +54,19 @@ export default new Router({
     },
     {
       path: '/',
-      name: 'Home',
       component: Home,
       beforeEnter: ifAuthenticated,
       children: [
-
+        {
+          path: '/',
+          name: 'ShopList',
+          component: ShopList,
+        },
+        {
+          path: '/favorites',
+          name: 'Favorites',
+          component: Favorites,
+        },
       ],
     },
   ],

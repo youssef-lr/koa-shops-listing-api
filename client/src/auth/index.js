@@ -1,7 +1,7 @@
 const key = '_token';
 
 export function saveToken(token) {
-  const json = JSON.stringify({ token });
+  const json = JSON.stringify(token);
   return localStorage.setItem(key, json);
 }
 
