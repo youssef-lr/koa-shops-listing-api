@@ -5,7 +5,7 @@ const getUser = require('../../user/tasks/get-user-task');
 module.exports = async (ctx) => {
   const data = ctx.request.body;
 
-  if (!data.email || !data.email) {
+  if (!data.email || !data.password) {
     ctx.status = 400;
     ctx.body = {
       message: 'Please supply both an email and a password',

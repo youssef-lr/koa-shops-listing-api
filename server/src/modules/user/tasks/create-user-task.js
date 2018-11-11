@@ -12,10 +12,12 @@ module.exports = async (data) => {
   try {
     await Joi.validate(data, schema);
   } catch (err) {
-    return {
-      // TODO: only return relevant data to the client
-      errors: err.details.map(d => d),
-    };
+    const errors = {};
+    err.details.forEach((e) => {
+      errors[e.context.key] = e.message;
+    });
+
+    return { errors };
   }
 
   const { email, password } = data;
