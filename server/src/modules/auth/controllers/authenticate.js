@@ -32,6 +32,8 @@ module.exports = async (ctx) => {
     ctx.body = {
       message: 'Invalid password',
     };
+
+    return;
   }
 
   const token = jwt.sign({

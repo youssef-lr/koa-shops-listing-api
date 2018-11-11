@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const createUser = require('../../user/tasks/create-user-task');
 
 module.exports = async (ctx) => {
@@ -12,5 +13,12 @@ module.exports = async (ctx) => {
     return;
   }
 
-  ctx.body = result;
+  const token = jwt.sign({
+    data: { id: result.id },
+  }, 'secret');
+
+  ctx.body = {
+    user: result,
+    token,
+  };
 };
