@@ -80,6 +80,15 @@ describe('routes: shops', () => {
     });
   });
 
+  describe('POST api/v1/shops/remove_favorite', () => {
+    it('should allow the user to remove a shop from favorites', async () => {
+      const shop = await knex('shops').where('name', 'C').first();
+      const res = await helpers.likeDislikeShop(shop.id, 'liked');
+      expect(res.body.success).to.equal(true);
+      // TODO
+    });
+  });
+
   describe('GET api/v1/shops', () => {
     it('should return 401 error if no jwt authorization header', async () => {
       const res = await chai.request(server).get(BASE);
