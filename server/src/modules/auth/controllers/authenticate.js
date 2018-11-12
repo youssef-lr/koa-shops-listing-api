@@ -37,7 +37,7 @@ module.exports = async (ctx) => {
   }
 
   const token = jwt.sign({
-    data: { id: user.id, email: user.email },
+    id: user.id, email: user.email,
   }, 'secret');
 
   ctx.status = 200;

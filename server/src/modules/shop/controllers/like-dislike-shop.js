@@ -1,7 +1,7 @@
 const likeDislike = require('../tasks/like-dislike-task');
 
 module.exports = async (ctx) => {
-  const userId = ctx.state.user.data.id;
+  const userId = ctx.state.user.id;
   const data = ctx.request.body;
 
   const res = await likeDislike(userId, data.shopId, data.likeStatus);

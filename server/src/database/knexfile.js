@@ -21,4 +21,20 @@ module.exports = {
       directory: path.join(__dirname, 'seeds'),
     },
   },
+  production: {
+    client: 'pg',
+    connection: {
+      host: 'localhost',
+      database: 'united',
+      port: 5432,
+      user: 'postgres',
+      password: 'hunter2',
+    },
+    migrations: {
+      directory: path.join(__dirname, 'migrations'),
+    },
+    seeds: {
+      directory: path.join(__dirname, 'seeds'),
+    },
+  },
 };

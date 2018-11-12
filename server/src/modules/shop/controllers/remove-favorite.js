@@ -1,7 +1,7 @@
 const removeFavorite = require('../tasks/remove-favorite-task');
 
 module.exports = async (ctx) => {
-  const userId = ctx.state.user.data.id;
+  const userId = ctx.state.user.id;
   const data = ctx.request.body;
 
   const res = await removeFavorite(userId, data.shopId);
