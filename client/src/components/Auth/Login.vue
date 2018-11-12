@@ -27,7 +27,7 @@
         </svg>
         <!-- eslint-enable -->
 
-        <span v-else>Login</span>
+        <template v-else>Login</template>
 
       </button>
 

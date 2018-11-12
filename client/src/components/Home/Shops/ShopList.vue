@@ -40,14 +40,16 @@ export default {
 
 <style>
 .shop-move {
-  transition: transform 1s;
+  transition: all 600ms ease-in-out 50ms;
 }
 .shop-enter-active {
   transition: all 0.2s ease-out;
 }
 
 .shop-leave-active {
-  transition: all 0.2s ease-in;
+  position: absolute;
+  opacity: 0;
+  transition: all 0.3s ease-in;
 }
 
 .shop-enter,
