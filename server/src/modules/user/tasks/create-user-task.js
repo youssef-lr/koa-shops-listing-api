@@ -7,12 +7,13 @@ module.exports = async (data) => {
   const schema = Joi.object().keys({
     email: Joi.string().email().required(),
     password: Joi.string().min(5).max(30).required(),
+    confirm: Joi.string().min(5).max(30).required(),
   });
+  const errors = {};
 
   try {
     await Joi.validate(data, schema);
   } catch (err) {
-    const errors = {};
     err.details.forEach((e) => {
       errors[e.context.key] = e.message;
     });
@@ -20,16 +21,21 @@ module.exports = async (data) => {
     return { errors };
   }
 
-  const { email, password } = data;
+  const { email, password, confirm } = data;
 
   const user = await getUser({ email });
 
   if (user) {
-    return {
-      errors:
-        { email: 'This email already exists.' },
-    };
+    errors.email = 'This email already exists.';
   }
+  if (confirm !== password) {
+    errors.confirm = 'Passwords do not match';
+  }
+
+  if (Object.keys(errors).length) {
+    return { errors };
+  }
+
 
   const salt = bcrypt.genSaltSync();
   const hash = bcrypt.hashSync(password, salt);

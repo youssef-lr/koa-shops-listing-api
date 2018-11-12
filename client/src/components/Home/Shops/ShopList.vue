@@ -48,6 +48,7 @@ export default {
 
 .shop-leave-active {
   position: absolute;
+  z-index: 0;
   opacity: 0;
   transition: all 0.3s ease-in;
 }

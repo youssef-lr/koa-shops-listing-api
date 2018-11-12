@@ -45,7 +45,7 @@ describe('routes: shops', () => {
 
   describe('POST api/v1/shops/like_dislike', () => {
     it('should allow a shop to be liked by authenticated user', async () => {
-      const shop = await knex('shops').where('name', 'A').first();
+      const shop = await knex('shops').where('name', 'Shop A').first();
       const res = await helpers.likeDislikeShop(shop.id, 'liked');
       expect(res.body.success).to.equal(true);
 
@@ -59,7 +59,7 @@ describe('routes: shops', () => {
     });
 
     it('should return all shops except user s favorites', async () => {
-      const shop = await knex('shops').where('name', 'A').first();
+      const shop = await knex('shops').where('name', 'Shop A').first();
       const res = await helpers.likeDislikeShop(shop.id, 'liked');
 
       expect(res.body.success).to.equal(true);
@@ -74,7 +74,7 @@ describe('routes: shops', () => {
     });
 
     it('should allow the user to dislike a shop', async () => {
-      const shop = await knex('shops').where('name', 'C').first();
+      const shop = await knex('shops').where('name', 'Shop C').first();
       const res = await helpers.likeDislikeShop(shop.id, 'disliked');
       expect(res.body.success).to.equal(true);
     });
@@ -82,7 +82,7 @@ describe('routes: shops', () => {
 
   describe('POST api/v1/shops/remove_favorite', () => {
     it('should allow the user to remove a shop from favorites', async () => {
-      const shop = await knex('shops').where('name', 'C').first();
+      const shop = await knex('shops').where('name', 'Shop C').first();
       const res = await helpers.likeDislikeShop(shop.id, 'liked');
       expect(res.body.success).to.equal(true);
       // TODO
@@ -107,24 +107,24 @@ describe('routes: shops', () => {
     });
 
     it('should return all shops except the user s favorites', async () => {
-      const shop = await knex('shops').where('name', 'A').first();
+      const shop = await knex('shops').where('name', 'Shop A').first();
       const res = await helpers.likeDislikeShop(shop.id, 'liked');
       expect(res.body.success).to.equal(true);
 
       const shops = await getAllShops(userId);
-      const favoriteShop = shops.find(s => s.name === 'A');
+      const favoriteShop = shops.find(s => s.name === 'Shop A');
       /* eslint-disable-next-line */
       expect(favoriteShop).to.be.undefined;
     });
 
     it('should not return disliked shop', async () => {
       // Fetching the shop to be disliked
-      const shop = await knex('shops').where('name', 'C').first();
+      const shop = await knex('shops').where('name', 'Shop C').first();
       const res = await helpers.likeDislikeShop(shop.id, 'disliked');
       expect(res.body.success).to.equal(true);
 
       const shops = await getAllShops(userId);
-      const dislikedShop = shops.find(s => s.name === 'C');
+      const dislikedShop = shops.find(s => s.name === 'Shop C');
 
       /* eslint-disable-next-line */
       expect(dislikedShop).to.be.undefined;
@@ -132,7 +132,7 @@ describe('routes: shops', () => {
 
     it('should return disliked shops when their dislike date is older than 2 hours', async () => {
       // Shop to be dislike
-      const shop = await knex('shops').where('name', 'C').first();
+      const shop = await knex('shops').where('name', 'Shop C').first();
       const res = await helpers.likeDislikeShop(shop.id, 'disliked');
       expect(res.body.success).to.equal(true);
 
@@ -147,7 +147,7 @@ describe('routes: shops', () => {
 
 
       const shops = await getAllShops(userId);
-      const dislikedShop = shops.find(s => s.name === 'C');
+      const dislikedShop = shops.find(s => s.name === 'Shop C');
       // Shop should still be in shops list
       expect(dislikedShop.id).to.equal(shop.id);
     });

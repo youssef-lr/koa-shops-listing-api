@@ -62,9 +62,24 @@ describe('routes: auth', () => {
         .send({
           email: 'user2@gmail.com',
           password: 'hunter2',
+          confirm: 'hunter2',
         });
 
       expect(res.body).to.have.all.keys('user', 'token');
+    });
+
+    it('should not register a user with password & confirmation dont match', async () => {
+      const res = await chai.request(server).post('/auth/register')
+        .send({
+          email: 'user2@gmail.com',
+          password: 'hunter2',
+          confirm: 'hunter3',
+        });
+
+      /* eslint-disable */
+      expect(res.body.errors).to.exist;
+      expect(res.body.errors.confirm).to.exist;
+      /* eslint-enable */
     });
 
     it('should not register a user with an existent email', async () => {
