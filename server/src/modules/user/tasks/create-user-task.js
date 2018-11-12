@@ -26,9 +26,8 @@ module.exports = async (data) => {
 
   if (user) {
     return {
-      errors: [
+      errors:
         { email: 'This email already exists.' },
-      ],
     };
   }
 
