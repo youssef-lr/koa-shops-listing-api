@@ -1,11 +1,10 @@
 <template>
-  <div class="mt-3 flex flex-wrap p-2">
+  <transition-group name="shop" class="mt-3 flex flex-wrap p-2">
     <shop-card on-favorites="true" :shop="shop" :key="shop.id" v-for="shop in shops"
                @shop-liked-disliked="handleLikeChange"
     >
-
     </shop-card>
-  </div>
+  </transition-group>
 </template>
 
 <script>

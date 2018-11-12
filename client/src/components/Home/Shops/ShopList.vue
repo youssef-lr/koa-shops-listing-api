@@ -1,11 +1,11 @@
 <template>
-  <div class="mt-3 flex flex-wrap p-2">
+  <transition-group name="shop" class="mt-3 flex flex-wrap p-2">
     <shop-card :shop="shop" :key="shop.id" v-for="shop in shops"
                @shop-liked-disliked="handleLikeChange"
     >
 
     </shop-card>
-  </div>
+  </transition-group>
 </template>
 
 <script>
@@ -38,3 +38,23 @@ export default {
 };
 </script>
 
+<style>
+.shop-move {
+  transition: transform 1s;
+}
+.shop-enter-active {
+  transition: all 0.2s ease-out;
+}
+
+.shop-leave-active {
+  transition: all 0.2s ease-in;
+}
+
+.shop-enter,
+.shop-leave-to {
+  opacity: 0;
+}
+.shop-enter {
+  transform: scale(0.9);
+}
+</style>
