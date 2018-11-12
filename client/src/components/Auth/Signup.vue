@@ -8,14 +8,14 @@
         </span>
       </transition>
 
-      <input placeholder="Password" type="text" class="input mt-6 p-3" v-model="password">
+      <input placeholder="Password" type="password" class="input mt-6 p-3" v-model="password">
       <transition name="fade">
         <span v-if="errors.password" class="input text-red text-sm font-bold mt-3 -mb-6">
           {{ errors.password }}
         </span>
       </transition>
 
-      <input placeholder="Confirm password" type="text" class="input mt-6 p-3">
+      <input placeholder="Confirm password" type="password" class="input mt-6 p-3">
 
       <button class="input bg-beige text-white font-bold mt-6 mb-3 opacity-75 hover:opacity-100"
               @click="signup">
@@ -54,6 +54,7 @@ export default {
       email: '',
       password: '',
       errors: {},
+      loading: false,
     };
   },
   methods: {
@@ -63,6 +64,7 @@ export default {
       }, 2000);
     },
     async signup() {
+      this.loading = true;
       let res;
       try {
         res = await axios.post('/auth/register', {
@@ -71,8 +73,10 @@ export default {
         });
       } catch (error) {
         this.errors = error.response.data.errors;
+        this.loading = false;
         return;
       }
+      this.loading = false;
 
       saveToken(res.data.token);
 
