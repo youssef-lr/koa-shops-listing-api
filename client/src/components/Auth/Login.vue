@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import { saveToken } from '../../auth';
-import { authenticate } from '../../api/auth';
+import { saveToken } from '@/utils/auth';
+import { authenticate } from '@/api/auth';
 
 export default {
   data() {

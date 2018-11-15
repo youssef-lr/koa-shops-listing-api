@@ -42,7 +42,7 @@
 
 <script>
 import axios from 'axios';
-import { saveToken } from '../../auth';
+import { saveToken } from '@/utils/auth';
 
 export default {
   data() {
