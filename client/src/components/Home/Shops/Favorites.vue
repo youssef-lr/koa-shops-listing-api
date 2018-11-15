@@ -1,9 +1,9 @@
 <template>
-  <transition-group name="shop" class="mt-3 flex flex-wrap p-2">
-    <shop-card on-favorites="true" :shop="shop" :key="shop.id" v-for="shop in shops"
-               @shop-liked-disliked="handleLikeChange"
-    >
-    </shop-card>
+  <transition-group name="shop" class="mt-3 justify-center flex flex-wrap xs:px-20 p-2"
+  >    <shop-card on-favorites="true" :shop="shop" :key="shop.id" v-for="shop in shops"
+                  @shop-liked-disliked="handleLikeChange"
+  >
+  </shop-card>
   </transition-group>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
-  <div class="w-1/4 p-2">
-    <div class="border border-black w-full h-full p-2">
+  <div class="sm:w-80 md:w-1/2 lg:w-1/4 p-2">
+    <div class="border border-black p-2">
       <h4 class="font-semibold">{{ shop.name }}</h4>
       <img style="height: 256px" class="mt-2" :src="shopImage(shop)" :alt="shop.name">
       <div class="flex justify-around mt-2">

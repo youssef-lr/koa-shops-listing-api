@@ -1,5 +1,6 @@
 <template>
-  <transition-group name="shop" class="mt-3 flex flex-wrap p-2">
+  <transition-group name="shop" class="mt-3 justify-center flex flex-wrap xs:px-20 p-2"
+  >
     <shop-card :shop="shop" :key="shop.id" v-for="shop in shops"
                @shop-liked-disliked="handleLikeChange"
     >
