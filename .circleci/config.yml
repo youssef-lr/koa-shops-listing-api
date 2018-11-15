@@ -9,8 +9,6 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_DB: united_test
 
-    working_directory: ~/koa-shops-listing-api/server
-
     steps:
       - checkout
 
@@ -19,11 +17,11 @@ jobs:
           - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
 
-      - run: npm install
+      - run: cd server  && npm install
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
         
-      - run: npm test
+      - run: cd server && npm test
