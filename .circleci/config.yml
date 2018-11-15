@@ -8,20 +8,23 @@ jobs:
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: united_test
+          POSTGRES_PASSWORD: ""
 
     steps:
       - checkout
 
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-{{ checksum "/server/package.json" }}
           - v1-dependencies-
 
-      - run: cd server  && npm install
+      - run: cd server && npm install
 
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-        
+          key: v1-dependencies-{{ checksum "/server/package.json" }}
+
+      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
+
       - run: cd server && npm test
