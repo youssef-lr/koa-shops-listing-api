@@ -9,7 +9,7 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_DB: united_test
 
-    working_directory: ~/server
+    working_directory: ~/koa-shops-listing-api/server
 
     steps:
       - checkout
