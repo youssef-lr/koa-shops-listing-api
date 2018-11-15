@@ -2,7 +2,7 @@ const Router = require('koa-router');
 const getAllShops = require('../controllers/get-all-shops');
 const getFavorites = require('../controllers/get-favorites');
 const likeDislike = require('../controllers/like-dislike-shop');
-const removeFavorite = require('../controllers/remove-favorite');
+const cancelLikeDislike = require('../controllers/cancel-like-dislike');
 
 const router = new Router();
 const BASE = '/api/v1/shops';
@@ -19,8 +19,8 @@ router.post(`${BASE}/like_dislike`, async (ctx) => {
   await likeDislike(ctx);
 });
 
-router.post(`${BASE}/remove_favorite`, async (ctx) => {
-  await removeFavorite(ctx);
+router.post(`${BASE}/cancel_like_dislike`, async (ctx) => {
+  await cancelLikeDislike(ctx);
 });
 
 

@@ -1,10 +1,10 @@
-const removeFavorite = require('../tasks/remove-favorite-task');
+const cancelLikeDislike = require('../tasks/cancel-like-dislike');
 
 module.exports = async (ctx) => {
   const userId = ctx.state.user.id;
   const data = ctx.request.body;
 
-  const res = await removeFavorite(userId, data.shopId);
+  const res = await cancelLikeDislike(userId, data.shopId);
 
   if (res.errors) {
     ctx.status = 422;

@@ -80,12 +80,33 @@ describe('routes: shops', () => {
     });
   });
 
-  describe('POST api/v1/shops/remove_favorite', () => {
+  describe('POST api/v1/shops/cancel_like_dislike', () => {
     it('should allow the user to remove a shop from favorites', async () => {
+      /*
+        liking a shop
+      */
       const shop = await knex('shops').where('name', 'Shop C').first();
       const res = await helpers.likeDislikeShop(shop.id, 'liked');
       expect(res.body.success).to.equal(true);
-      // TODO
+
+      /*
+        Disliking the same shop
+      */
+      const result = await chai.request(server)
+        .post(`${BASE}/cancel_like_dislike`)
+        .set('Authorization', `Bearer ${token}`)
+        .send({
+          shopId: shop.id,
+        });
+      expect(result.body.success).to.equal(true);
+
+      /* Retreiving favorites */
+      const response = await chai.request(server)
+        .get(`${BASE}/favorites`)
+        .set('Authorization', `Bearer ${token}`);
+
+      /* eslint-disable-next-line */
+      expect(response.body.favorites).to.be.empty;
     });
   });
 
