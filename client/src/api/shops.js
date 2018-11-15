@@ -46,13 +46,13 @@ export async function likeDislike(shopId, likeStatus) {
   }
 }
 
-export async function removeFavorite(shopId) {
+export async function cancelLikeDislike(shopId) {
   const data = {
     shopId,
   };
 
   try {
-    const res = await axios.post(`${BASE}/remove_favorite`, data);
+    const res = await axios.post(`${BASE}/cancel_like_dislike`, data);
     return res.data;
   } catch (err) {
     if (err.response.data) {
@@ -62,4 +62,3 @@ export async function removeFavorite(shopId) {
     return { message: 'The server has encountered an error.' };
   }
 }
-

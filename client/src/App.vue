@@ -1,23 +1,14 @@
 <template>
-  <div id="app" class="h-screen bg-black relative overflow-auto">
+  <div id="app" class="h-screen bg-black relative">
     <transition name="fade" mode="out-in">
       <router-view/>
     </transition>
-
-
   </div>
 </template>
 
 <script>
-import { isAuthenticated } from './auth';
-
 export default {
   name: 'App',
-  data() {
-    return {
-      isAuthenticated: isAuthenticated(),
-    };
-  },
 };
 </script>
 
@@ -25,6 +16,10 @@ export default {
 @tailwind preflight;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  overflow: hidden;
+}
 
 .fade-enter-active,
 .fade-leave-active {

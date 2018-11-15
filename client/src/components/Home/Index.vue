@@ -8,8 +8,6 @@
         <router-link to="/favorites" class="no-underline text-blue border-b border-blue" exact>
           My preferred Shops
         </router-link>
-        <!-- eslint-disable -->
-        <!-- eslint-enable -->
       </header>
 
       <transition name="fade" mode="out-in">
@@ -23,16 +21,16 @@
           Logout
         </router-link>
       </div>
+
     </div>
   </div>
 </template>
 
 <script>
-import ShopList from './Shops/ShopList';
-
 export default {
-  components: {
-    ShopList,
+  created() {},
+  data() {
+    return {};
   },
 };
 </script>
@@ -40,6 +38,13 @@ export default {
 <style>
 .router-link-active {
   @apply border-transparent;
+}
+
+.notif-enter,
+.notif-leave-to {
+  opacity: 0;
+  transform: translateY(70px);
+  transition: all 0.4s ease-out;
 }
 </style>
 

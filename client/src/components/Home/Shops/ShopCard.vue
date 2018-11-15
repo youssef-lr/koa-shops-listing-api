@@ -28,7 +28,8 @@
 </template>
 
 <script>
-import { likeDislike, removeFavorite } from '@/api/shops';
+import { likeDislike, cancelLikeDislike } from '@/api/shops';
+import emitter from '@/utils/events';
 
 export default {
   props: ['shop', 'onFavorites'],
@@ -39,6 +40,7 @@ export default {
     },
     async like() {
       const res = await likeDislike(this.shop.id, 'liked');
+      emitter.emit('shop-liked', this.shop.id);
 
       if (res.success) {
         this.$emit('shop-liked-disliked', this.shop.id);
@@ -54,10 +56,11 @@ export default {
 
       if (res.success) {
         this.$emit('shop-liked-disliked', this.shop.id);
+        emitter.emit('shop-disliked', this.shop.id);
       }
     },
     async removeFromFavorites() {
-      const res = await removeFavorite(this.shop.id);
+      const res = await cancelLikeDislike(this.shop.id);
 
       if (res.success) {
         this.$emit('shop-liked-disliked', this.shop.id);

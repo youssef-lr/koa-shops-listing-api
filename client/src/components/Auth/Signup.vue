@@ -84,7 +84,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="postcss">
 .input {
   @apply block h-8 rounded w-64;
 }

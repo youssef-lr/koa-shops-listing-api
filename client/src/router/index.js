@@ -7,7 +7,7 @@ import Home from '../components/Home/Index';
 import ShopList from '../components/Home/Shops/ShopList';
 import Favorites from '../components/Home/Shops/Favorites';
 
-import { isAuthenticated, removeToken } from '../auth';
+import { isAuthenticated, removeToken } from '../utils/auth';
 
 Vue.use(Router);
 

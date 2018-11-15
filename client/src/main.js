@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import App from './App';
 import router from './router';
-import { getToken } from './auth';
+import { getToken } from './utils/auth';
 
 axios.defaults.baseURL = process.env.API_URL;
 
