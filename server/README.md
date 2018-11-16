@@ -15,3 +15,5 @@ A simple shops listing API with jwt authentication built using the following sta
 5. Migrate - knex migrate:latest --env development (`npm i -g knex` if not installed)
 6. Seed - knex seed:run --env development
 7. Run tests `npm run test`
+
+[![CircleCI](https://circleci.com/gh/youssef-lr/koa-shops-listing-api.svg?style=svg)](https://circleci.com/gh/youssef-lr/koa-shops-listing-api)
