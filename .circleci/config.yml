@@ -3,8 +3,12 @@ jobs:
   build:
     docker:
       - image: circleci/node:8.12.0
+        environment:
+          NODE_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: postgres
       
-      - image: circleci/postgres:10.5
+      - image: circleci/10.6-alpine-ram
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: united_test
@@ -15,7 +19,7 @@ jobs:
 
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "/server/package.json" }}
+          - v1-dependencies-{{ checksum "package.json" }}
           - v1-dependencies-
 
       - run: cd server && npm install
@@ -23,7 +27,7 @@ jobs:
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "/server/package.json" }}
+          key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
 
