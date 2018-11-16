@@ -8,7 +8,7 @@ jobs:
           PGHOST: 127.0.0.1
           PGUSER: postgres
       
-      - image: circleci/10.6-alpine-ram
+      - image: circleci/postgres:9.6-alpine
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: united_test
