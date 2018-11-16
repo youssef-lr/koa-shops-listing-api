@@ -32,3 +32,9 @@ jobs:
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run: cd server && npm test
+
+    deployment:
+      production:
+        branch: master
+        commands:
+          - ssh ubuntu@ec2-18-208-114-248.compute-1.amazonaws.com './deploy.sh'
