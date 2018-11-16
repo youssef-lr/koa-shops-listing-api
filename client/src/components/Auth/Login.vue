@@ -1,8 +1,8 @@
 <template>
   <div class="h-full flex items-center justify-center">
     <div class="flex flex-col justify-center" @keyup.enter="login">
-      <input placeholder="Email" type="text" class="input mb-6 p-3" v-model="email">
-      <input placeholder="Password" type="password" class="input mb-6 p-3" v-model="password">
+      <input placeholder="user@gmail.com" type="text" class="input mb-6 p-3" v-model="email">
+      <input placeholder="hunter2" type="password" class="input mb-6 p-3" v-model="password">
       <transition name="fade">
         <span v-if="error" class="input text-sm font-bold -mt-3 mb-2 block" style="color: #D6375A">
           {{ error }}
