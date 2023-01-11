@@ -14,7 +14,7 @@
     "bcryptjs": "^2.4.3",
     "joi": "^14.0.4",
     "jsonwebtoken": "^8.3.0",
-    "knex": "^0.15.2",
+    "knex": "^2.4.0",
     "koa": "^2.6.1",
     "koa-bodyparser": "^4.2.1",
     "koa-jwt": "^3.5.1",
